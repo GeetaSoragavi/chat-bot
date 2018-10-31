@@ -6,6 +6,8 @@ const request = require('request');
 
 const app = express();
 
+const token = "EAAReVJUEResBAOknqWe7SxjjOv3zxATZCOZCrgxZBLQN7TczfMZCO4ZBfrvwsPQg2lzPgdmf2UAi5LZAHZAQ5H2y7zZCX8LY4LmxpXhRrlCOhcUqh3bcrRhqm0BSP9p7nlxZARNL4xUh3WPblZCLQgKbGTkmkaAnXmXHdVJbqLrLP5twZDZD";
+
 app.set('port',(process.env.PORT || 5000));
 
 app.use(bodyparser.urlencoded({extended: false}));
