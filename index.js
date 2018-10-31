@@ -6,7 +6,9 @@ const request = require('request');
 
 const app = express();
 
-app.use(bodyparser,urlencoded({extended: false}));
+app.set('port',(process.env.PORT || 5000));
+
+app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
 
 app.get('/', function(req, res){
