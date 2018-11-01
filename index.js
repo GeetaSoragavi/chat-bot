@@ -75,7 +75,7 @@ function sendText(sender, text){
         //If the user has entered date the action is input.date from api.ai
         if(action.includes("input.date")){
             let date = response.result.parameters.date;
-            calculteDays(date).then(function(days){
+            calculateDays(date).then(function(days){
                 aiText = `There are ${days} left for your next birthday`;
             });
         }
