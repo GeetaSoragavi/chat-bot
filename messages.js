@@ -8,18 +8,11 @@ let addMessage = function(message) {
    message_list.push(msg);
 }
 
-let findById = function(messageId) {
-
-}
 
 let deleteById = function(messageId) {
     for(let index = 0; index < message_list.length; index++){
         if(messageId == message_list[index].id){
             message_list.splice(index,1);
-        }else{
-            console.log("List Id" + message_list[index].id);
-            console.log("List Id" + messageId);
-
         }
     }
 
@@ -27,7 +20,6 @@ let deleteById = function(messageId) {
 
 module.exports.message_list = message_list;  
 module.exports.addMessage = addMessage;
-module.exports.findById = findById;
 module.exports.deleteById = deleteById;
 
 

@@ -26,7 +26,6 @@ app.get('/messages', function(req, res){
 
 app.get('/messages/:messageId', function(req,res){
     Messages.deleteById(req.params.messageId);
-    console.log("MessageId: " + req.params.messageId);
     res.send(Messages.message_list);
 
 });
