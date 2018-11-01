@@ -43,6 +43,33 @@ app.post('/webhook/',function(req, res){
 
 });
 
+//Setting up a greeting text
+function createGreetingApi(data) {
+    request({
+        uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: 'POST',
+        json: data
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log("Greeting set successfully!");
+        } else {
+            console.error("Failed calling Thread Reference API", response.statusCode,     response.statusMessage, body.error);
+        }
+    });  
+}
+
+function setGreetingText() {
+    var greetingData = {
+        setting_type: "greeting",
+        greeting:{
+            text:"Hi {{user_first_name}}, Thanks for getting in touch. Please enter your birthdate to know how many days for your next birthday. Thank you!";
+        }
+    };
+    createGreetingApi(greetingData);
+}
+
+
 function sendText(sender, text){
 
     let apiai = apiaiApp.textRequest(text, {
@@ -50,6 +77,7 @@ function sendText(sender, text){
     });
 
     apiai.on('response', function(response) {
+        console.log("Response: " + response.result);
         let aiText = response.result.fulfillment.speech;
 
         request({
@@ -82,4 +110,5 @@ function sendText(sender, text){
 
 app.listen(app.get('port'), function(){
     console.log("Running: port");
+    setGreetingText();
 })
