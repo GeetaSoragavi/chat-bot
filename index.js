@@ -24,6 +24,10 @@ app.get('/messages', function(req, res){
     res.send(Messages.message_list);
 });
 
+app.get('/messages/:messageId', function(req,res){
+    Messages.deleteById(req.params.messageId);
+});
+
 app.get('/webhook/', function(req,res){
     if(req.query['hub.verify_token'] === "umsgbot") {
         res.send(req.query['hub.challenge']);

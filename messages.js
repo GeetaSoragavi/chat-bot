@@ -13,6 +13,11 @@ let findById = function(messageId) {
 }
 
 let deleteById = function(messageId) {
+    for(let index = 0; index < message_list.length; index++){
+        if(messageId === message_list[index].id){
+            message_list.splice(index,1);
+        }
+    }
 
 }
 
