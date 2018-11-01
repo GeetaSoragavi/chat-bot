@@ -71,13 +71,13 @@ function sendText(sender, text){
         console.log("Response: " + JSON.stringify(response.result));
         let action = response.result.action;
         let aiText = response.result.fulfillment.speech;
-        console.log("Action: " + action);
 
 
         //If the user has entered date the action is input.date from api.ai
         if(action.includes("input.date")){
             let date = response.result.parameters.date;
             calculateDays(date).then(function(days){
+                console.log("Days difference: " + days);
                 aiText = `There are ${days} left for your next birthday`;
             });
         }
