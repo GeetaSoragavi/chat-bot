@@ -45,22 +45,17 @@ app.post('/webhook/',function(req, res){
 
 function sendText(sender, text){
 
+    console.log("Text: " + text);
+
     let apiai = apiaiApp.textRequest(text, {
         sessionId: 'msg_sId' 
     });
 
     apiai.on('response', function(response) {
         console.log("Response: " + JSON.stringify(response.result));
-        let aiText = "Initial action";
-        let action = response.result.fulfillment.action;
+        let action = response.result.action;
+        let aiText = response.result.fulfillment.speech;
 
-        //let aiText = response.result.fulfillment.speech;
-
-        if(action === "help"){
-            aiText = "its a help action";
-        } else {
-            aiText = "its a other action";
-        }
 
         request({
             url: "https://graph.facebook.com/v2.6/me/messages",
