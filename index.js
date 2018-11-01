@@ -56,6 +56,7 @@ let calculateDays = function(date){
         let daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
         resolve(daysDiff);
     });
+    return promise;
 }
 
 function sendText(sender, text){
