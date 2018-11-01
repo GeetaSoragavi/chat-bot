@@ -4,6 +4,7 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const request = require('request');
 const Promise = require('bluebird');
+const Messages = require('./messages');
 
 const app = express();
 
@@ -16,10 +17,12 @@ app.use(bodyparser.urlencoded({extended: false}));
 app.use(bodyparser.json());
 
 app.get('/', function(req, res){
-    res.send("I am a chatbot");
+    res.send("I am a messengerBot");
 });
 
-
+app.get('/messages', function(req, res){
+    res.send(Messages.message_list);
+});
 
 app.get('/webhook/', function(req,res){
     if(req.query['hub.verify_token'] === "umsgbot") {
@@ -37,6 +40,7 @@ app.post('/webhook/',function(req, res){
         let sender = event.sender.id;
         if(event.message && event.message.text){
             let text = event.message.text;
+            Messages.addMessage(text);
             sendText(sender, text.substring(0,100));
         }
     }
@@ -99,7 +103,7 @@ function sendText(sender, text) {
             let date = response.result.parameters.date;
             calculateDays(date).then(function (days) {
                 console.log("Days difference: " + days);
-                aiText = `There are ${days} left for your next birthday`;
+                aiText = `There are ${days} days left for your next birthday`;
                 sendRequest(sender, aiText);
             });
         } else {
@@ -118,3 +122,4 @@ function sendText(sender, text) {
 app.listen(app.get('port'), function(){
     console.log("Running: port");
 })
+
