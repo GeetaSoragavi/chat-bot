@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyparser = require('body-parser');
 const request = require('request');
+const Promise = require('bluebird');
 
 const app = express();
 
@@ -43,6 +44,20 @@ app.post('/webhook/',function(req, res){
 
 });
 
+function calculteDays(date){
+    let promise = new Promise(function(resolve, reject) {
+        if(!date){
+            reject("There is no date given");
+        }
+        let startDate = Date.parse(date);
+        let today = new Date().toISOString().slice(0,10); 
+        let endDate = Date.parse(today);
+        let timeDiff = endDate - startDate;
+        let daysDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        resolve(daysDiff);
+    });
+}
+
 function sendText(sender, text){
 
     console.log("Text: " + text);
@@ -59,7 +74,10 @@ function sendText(sender, text){
 
         //If the user has entered date the action is input.date from api.ai
         if(action.includes("input.date")){
-            aiText = "date entered";
+            let date = response.result.parameters.date;
+            calculteDays(date).then(function(days){
+                aiText = `There are ${days} left for your next birthday`;
+            });
         }
         request({
             url: "https://graph.facebook.com/v2.6/me/messages",
