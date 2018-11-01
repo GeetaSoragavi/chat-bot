@@ -1,6 +1,6 @@
-exports.message_list = [];
+var message_list = [];
 
-exports.addMessage = (message) => {
+let addMessage = function(message) {
    let msg = {
        id: Math.floor((Math.random() * 100) + 1),
        text: message
@@ -8,13 +8,19 @@ exports.addMessage = (message) => {
    message_list.push(msg);
 }
 
-exports.findById = (messageId) => {
+let findById = function(messageId) {
 
 }
 
-exports.deleteById = (messageId) => {
+let deleteById = function(messageId) {
 
 }
+
+module.exports.message_list = message_list;  
+module.exports.addMessage = addMessage;
+module.exports.findById = findById;
+module.exports.deleteById = deleteById;
+
 
 
 
