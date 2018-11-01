@@ -51,7 +51,7 @@ function sendText(sender, text){
 
     apiai.on('response', function(response) {
         console.log("Response: " + response.result);
-        aiText = "Initial action";
+        let apiText = "Initial action";
         let action = response.result.fulfillment.action;
 
         //let aiText = response.result.fulfillment.speech;
