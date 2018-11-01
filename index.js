@@ -47,7 +47,7 @@ app.post('/webhook/',function(req, res){
 function createGreetingApi(data) {
     request({
         uri: 'https://graph.facebook.com/v2.6/me/thread_settings',
-        qs: { access_token: PAGE_ACCESS_TOKEN },
+        qs: { access_token: token },
         method: 'POST',
         json: data
     }, function (error, response, body) {
