@@ -69,18 +69,22 @@ function sendText(sender, text){
 
     apiai.on('response', function(response) {
         console.log("Response: " + JSON.stringify(response.result));
+        let aiText = "";
         let action = response.result.action;
-        let aiText = response.result.fulfillment.speech;
-
 
         //If the user has entered date the action is input.date from api.ai
-        if(action.includes("input.date")){
+        if (action.includes("input.date")) {
             let date = response.result.parameters.date;
-            calculateDays(date).then(function(days){
+            calculateDays(date).then(function (days) {
                 console.log("Days difference: " + days);
                 aiText = `There are ${days} left for your next birthday`;
             });
+        } else {
+            aiText = response.result.fulfillment.speech;
         }
+
+
+        
         request({
             url: "https://graph.facebook.com/v2.6/me/messages",
             qs: {access_token: token},
