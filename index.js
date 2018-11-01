@@ -59,15 +59,37 @@ let calculateDays = function(date){
     return promise;
 }
 
-function sendText(sender, text){
+let sendRequest = function(sender,text){
+
+    request({
+        url: "https://graph.facebook.com/v2.6/me/messages",
+        qs: { access_token: token },
+        method: "POST",
+        json: {
+            recipient: { id: sender },
+            message: { text: text }
+        }
+    }, function (error, response, body) {
+        if (error) {
+            console.log("Error while sending");
+        } else if (response.body.error) {
+            console.log("response body error");
+            console.log(response.body.error);
+        }
+
+    })
+    
+}
+
+function sendText(sender, text) {
 
     console.log("Text: " + text);
 
     let apiai = apiaiApp.textRequest(text, {
-        sessionId: 'msg_sId' 
+        sessionId: 'msg_sId'
     });
 
-    apiai.on('response', function(response) {
+    apiai.on('response', function (response) {
         console.log("Response: " + JSON.stringify(response.result));
         let aiText = "";
         let action = response.result.action;
@@ -78,30 +100,12 @@ function sendText(sender, text){
             calculateDays(date).then(function (days) {
                 console.log("Days difference: " + days);
                 aiText = `There are ${days} left for your next birthday`;
+                sendRequest(sender, aiText);
             });
         } else {
             aiText = response.result.fulfillment.speech;
+            sendRequest(sender, aiText);
         }
-
-
-        
-        request({
-            url: "https://graph.facebook.com/v2.6/me/messages",
-            qs: {access_token: token},
-            method: "POST",
-            json: {
-                recipient: {id: sender},
-                message: {text: aiText}
-            }
-        }, function(error, response, body) {
-            if(error) {
-                console.log("Error while sending");
-            } else if(response.body.error){
-                console.log("response body error");
-                console.log(response.body.error);
-            }
-    
-        })
     });
 
     apiai.on('error', function(error) {
