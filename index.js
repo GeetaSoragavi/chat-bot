@@ -44,7 +44,7 @@ app.post('/webhook/',function(req, res){
 
 });
 
-function calculteDays(date){
+let calculateDays = function(date){
     let promise = new Promise(function(resolve, reject) {
         if(!date){
             reject("There is no date given");
