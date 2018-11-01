@@ -51,7 +51,16 @@ function sendText(sender, text){
 
     apiai.on('response', function(response) {
         console.log("Response: " + response.result);
-        let aiText = response.result.fulfillment.speech;
+        aiText = "Initial action";
+        let action = response.result.fulfillment.action;
+
+        //let aiText = response.result.fulfillment.speech;
+
+        if(action === "help"){
+            apiText = "its a help action";
+        } else {
+            apiText = "its a other action";
+        }
 
         request({
             url: "https://graph.facebook.com/v2.6/me/messages",
