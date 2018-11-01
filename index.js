@@ -30,9 +30,7 @@ app.get('/webhook/', function(req,res){
 app.post('/webhook/',function(req, res){
 
     let msg_event = req.body.entry[0].messaging;
-    let apiai = apiaiApp.textRequest(text, {
-        sessionId: "msg_sessionId"
-    });
+    
     for(let index = 0; index < msg_event.length; index++){
         let event = msg_event[index];
         let sender = event.sender.id;
