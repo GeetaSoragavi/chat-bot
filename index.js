@@ -50,7 +50,7 @@ function sendText(sender, text){
     });
 
     apiai.on('response', function(response) {
-        console.log("Response: " + response.result);
+        console.log("Response: " + JSON.stringify(response.result));
         let aiText = "Initial action";
         let action = response.result.fulfillment.action;
 
