@@ -57,6 +57,10 @@ function sendText(sender, text){
         let aiText = response.result.fulfillment.speech;
 
 
+        //If the user has entered date the action is input.date from api.ai
+        if(action.includes("input.date")){
+            aiText = "date entered";
+        }
         request({
             url: "https://graph.facebook.com/v2.6/me/messages",
             qs: {access_token: token},
