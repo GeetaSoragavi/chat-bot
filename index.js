@@ -71,6 +71,7 @@ function sendText(sender, text){
         console.log("Response: " + JSON.stringify(response.result));
         let action = response.result.action;
         let aiText = response.result.fulfillment.speech;
+        console.log("Action: " + action);
 
 
         //If the user has entered date the action is input.date from api.ai
