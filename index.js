@@ -62,8 +62,8 @@ function createGreetingApi(data) {
 function setGreetingText() {
     var greetingData = {
         setting_type: "greeting",
-        greeting:{
-            text:"Hi {{user_first_name}}, Thanks for getting in touch. Please enter your birthdate to know how many days for your next birthday. Thank you!";
+        greeting: {
+            text:"Hi {{user_first_name}}, Thanks for getting in touch. Please enter your birthdate to know how many days for your next birthday. Thank you!"
         }
     };
     createGreetingApi(greetingData);
