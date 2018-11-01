@@ -9,6 +9,7 @@
   "author": "Geeta Soragavi",
   "license": "MIT",
   "dependencies": {
+    "apiai": "^4.0.3",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "request": "^2.88.0"
