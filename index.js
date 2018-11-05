@@ -8,8 +8,8 @@ const Messages = require('./messages');
 
 const app = express();
 
-let token = "EAAReVJUEResBAOknqWe7SxjjOv3zxATZCOZCrgxZBLQN7TczfMZCO4ZBfrvwsPQg2lzPgdmf2UAi5LZAHZAQ5H2y7zZCX8LY4LmxpXhRrlCOhcUqh3bcrRhqm0BSP9p7nlxZARNL4xUh3WPblZCLQgKbGTkmkaAnXmXHdVJbqLrLP5twZDZD";
-const apiaiApp = require('apiai')("419773b76c474f8fa3798a6b55989807");
+let token = "TOKEN_FROM_FACEBOOK";
+const apiaiApp = require('apiai')("API.AI_TOKEN");
 
 app.set('port',(process.env.PORT || 5000));
 
